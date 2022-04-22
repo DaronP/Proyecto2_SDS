@@ -6,8 +6,8 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import MultinomialNB
 import pickle
 from tqdm import tqdm
+from sklearn.preprocessing import StandardScaler
 
+db = pd.read_csv('./preprocess_pt3.csv')
 
-db = pd.read_csv('preprocess_pt2.csv')
-
-print()
+print(db['HasDetections'].value_counts())

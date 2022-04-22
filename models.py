@@ -13,13 +13,20 @@ import seaborn as sns
 from sklearn import metrics, model_selection
 from sklearn.linear_model import LogisticRegression
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import confusion_matrix
+from sklearn.preprocessing import StandardScaler
+from sklearn.decomposition import PCA
 
 #Importar data
-df = pd.read_csv('./preprocess_pt2.csv')
+
+df = pd.read_csv('./preprocess_pt3.csv')
+
+
 
 #Separar train y test
 target = df['HasDetections']
 feature_matrix = df.drop(['HasDetections'], axis=1)
+
 
 #print('Final features:', feature_matrix.columns)
 feature_matrix.head()
