@@ -43,16 +43,19 @@ def score_model(model, train_data, train_labels, score_data, score_labels):
     
     cm = confusion_matrix(score_labels, pred)
     accuracy = metrics.accuracy_score(y_true=score_labels, y_pred=pred)
+    cr = metrics.classification_report(score_labels, pred, target_names=['detected', 'not detected'])
     
-    return accuracy, cm
+    return accuracy, cm, cr
 
 def output_results(model, model_name, X_train, y_train, X_score, y_score):
-    score, cm = score_model(model, X_train, y_train, X_score, y_score)
+    score, cm, cr = score_model(model, X_train, y_train, X_score, y_score)
 
     print(f"Predicting with " + model_name + " :\n")
     print(f"{100*score:0.1f}% accuracy\n")
     print("confusion matrix")
     print(cm)
+    print("classification report")
+    print(cr)
 
 X_train = feature_matrix_train
 y_train = target_train
