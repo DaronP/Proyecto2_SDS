@@ -12,6 +12,7 @@ import seaborn as sns
 #import torch.nn as nn
 from sklearn import metrics, model_selection
 from sklearn.linear_model import LogisticRegression
+from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import confusion_matrix
 from sklearn.preprocessing import StandardScaler
@@ -33,6 +34,7 @@ feature_matrix.head()
 
 #División de datos de entrenamientos y prueba
 feature_matrix_train, feature_matrix_test, target_train, target_test = model_selection.train_test_split(feature_matrix, target, test_size=0.30, random_state=31)
+
 
 #Métodos para aplicar los modelos
 def score_model(model, train_data, train_labels, score_data, score_labels):
@@ -71,5 +73,17 @@ output_results(model, model_name, X_train, y_train, X_score, y_score)
 #Modelo 2
 model_name = "K-Nearest Neighbor Classifier"
 model = KNeighborsClassifier(n_neighbors=9, n_jobs=-1)
+
+output_results(model, model_name, X_train, y_train, X_score, y_score)
+
+#Modelo 3
+model_name = "Naive Bayes"
+
+sc = StandardScaler()
+
+X_train = sc.fit_transform(X_train)
+X_score = sc.transform(X_score)
+
+model = GaussianNB()
 
 output_results(model, model_name, X_train, y_train, X_score, y_score)
