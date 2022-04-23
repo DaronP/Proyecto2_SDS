@@ -6,6 +6,8 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import MultinomialNB
 import pickle
 from tqdm import tqdm
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 feat_to_drop = ['PuaMode', 
                 'Census_ProcessorClass', 
@@ -19,19 +21,31 @@ feat_to_drop = ['PuaMode',
 prep_pt1 = False
 prep_pt2 = False
 
+db = pd.read_csv('train.csv', low_memory=False)
+
+print(len(db.columns))
+
+print(db['HasDetections'].value_counts())
+
+missing_data = (db.isnull().sum()/db.isnull().count()*100).sort_values(ascending = False)
+
+print(missing_data.head(10))
+
+
 if prep_pt1:
 
     db = pd.read_csv('train.csv', low_memory=False)
     print('wdawd')
-    print(db.describe())
+    #print(db.describe())
 
     rnd = np.random.randint(len(db))
     rnd2 = np.random.randint(len(db))
     rnd3 = np.random.randint(len(db))
 
+    
     for i in db.columns:
         print(i, ": ", type(db[i][rnd]), " ------> ", db[i][rnd], ", ", db[i][rnd2], ", ", db[i][rnd3], '\n', db[i].value_counts())
-
+    
     print(len(db.columns))
 
     #Verificando valores nulos

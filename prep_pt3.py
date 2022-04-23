@@ -8,6 +8,9 @@ import pickle
 from tqdm import tqdm
 from sklearn.preprocessing import StandardScaler
 
+import seaborn as sns
+import matplotlib.pyplot as plt
+
 dtypes = {
         'MachineIdentifier':                                    'str',
         'ProductName':                                          'str',
@@ -102,6 +105,12 @@ if 'Unnamed: 0' in db.columns:
     db.drop('Unnamed: 0', inplace=True, axis=1)
 if 'Unnamed: 0.1' in db.columns:
     db.drop('Unnamed: 0.1', inplace=True, axis=1)
+
+corr_df = db.corr(method='pearson')
+
+plt.figure()
+sns.heatmap(corr_df, annot=True)
+plt.show()
 
 db = pd.get_dummies(db)
 
